@@ -1,4 +1,4 @@
-"spec_helper"
+require "spec_helper"
 require "blackjack"
 
 describe Blackjack do
@@ -15,10 +15,13 @@ describe Blackjack do
   end
 
   describe '#start_game!' do
+    it 'shuffles the deck' do
+      # expect()
+    end
+
     it 'deals a 2 card hand from the Dealer' do
       expect(subject.player.hand.size).to eq 2
       expect(subject.dealer.hand.size).to eq 2
-      
     end
   end
 end

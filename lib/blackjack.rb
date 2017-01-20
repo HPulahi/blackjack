@@ -3,6 +3,7 @@ require 'blackjack/player'
 
 class Blackjack
   attr_accessor :dealer, :player
+
   def initialize
     introduction
     self.dealer = Dealer.new

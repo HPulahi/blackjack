@@ -7,8 +7,9 @@ class Dealer
     self.deck = Deck.new
   end
 
-  def open_game
+  def shuffle
     # shuffle deck
+
     # deal 2 cards
   end
 end
