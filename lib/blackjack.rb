@@ -5,8 +5,10 @@ class Blackjack
 
   def launch!
     introduction
+  end
 
-
+  def start_game
+    
   end
 
   def introduction
