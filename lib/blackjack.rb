@@ -5,13 +5,18 @@ class Blackjack
   attr_accessor :dealer, :player
 
   def initialize
-    introduction
-    self.dealer = Dealer.new
+    # introduction
+    self.dealer = Dealer.new(self)
     self.player = Player.new
   end
 
   def start_game!
+    dealer.open_game(player)
+
+    puts(dealer.deck.cards.size)
+    puts("player cards -> #{player.hand.inspect}")
   end
+
   private
 
   def introduction

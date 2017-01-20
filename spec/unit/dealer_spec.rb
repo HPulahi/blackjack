@@ -9,4 +9,14 @@ describe Dealer do
     end
   end
 
+  describe "#deal" do
+    it "adds a new card to the players deck" do
+      expect(subject.player.hand.size).to eq(1)
+    end
+
+    it 'takes a card from the card stack' do
+      expect(subject.deck.cards.size).to eq 51
+    end
+  end
+
 end

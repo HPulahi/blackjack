@@ -21,5 +21,18 @@ describe Deck do
     end
   end
 
+  describe '#draw' do
+    it 'returns a single card' do
+      card = subject.draw
+      expect(card).to be_a Card
+    end
+
+    it 'removes a card from the stack' do
+      card = subject.draw
+      expect(subject.cards.size).to eq(51)
+    end
+  end
+
+
 end
 
