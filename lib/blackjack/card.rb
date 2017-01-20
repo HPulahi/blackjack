@@ -13,9 +13,10 @@ class Card
     %w(hearts diamonds spades clubs)
   end
 
-  attr_accessor :id, :value, :suit
+  attr_accessor :id, :value, :suit, :position
 
   def initialize(card_hash, suit)
+    self.id = card_hash["id"]
     self.value = card_hash["value"]
     self.suit = suit
   end
@@ -25,5 +26,4 @@ class Card
       JSON.parse(File.read(File.expand_path("./../data/cards.json", File.dirname(__FILE__))))["cards"]
     end
   end
-
 end
