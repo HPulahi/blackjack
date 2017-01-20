@@ -1,17 +1,23 @@
 require 'json'
 
 class Card
-
   def self.all
-    Data.read.map do |card_hash|
-      new(card_hash)
+    cards = []
+    suits.each do |suit|
+      Data.read.map {|card_hash| cards << new(card_hash, suit)}
     end
+    cards
   end
 
-  attr_accessor :id, :value
+  def self.suits
+    %w(hearts diamonds spades clubs)
+  end
 
-  def initialize(card_hash)
+  attr_accessor :id, :value, :suit
+
+  def initialize(card_hash, suit)
     self.value = card_hash["value"]
+    self.suit = suit
   end
 
   module Data
