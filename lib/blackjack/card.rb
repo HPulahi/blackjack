@@ -14,7 +14,6 @@ class Card
   end
 
   attr_accessor :id, :value, :suit, :position
-
   def initialize(card_hash, suit)
     self.id = card_hash["id"]
     self.value = card_hash["value"]

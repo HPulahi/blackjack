@@ -1,7 +1,8 @@
 require 'card'
+
 class Deck
-  
   attr_accessor :cards
+
   def initialize
     self.cards = Card.all
     set_position(cards)
@@ -12,5 +13,4 @@ class Deck
       card.position = i += 1
     end
   end
-
 end
