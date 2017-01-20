@@ -4,7 +4,7 @@
 APP_ROOT = File.dirname(__FILE__)
 
 $:.unshift(File.join(APP_ROOT, 'lib') )
+require 'blackjack'
 
-require 'Blackjack'
-
-Blackjack.run
+blackjack = Blackjack.new
+blackjack.launch!
