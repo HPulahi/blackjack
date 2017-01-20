@@ -33,5 +33,9 @@ describe Blackjack do
     it 'deals the dealer 2 cards' do
       expect(subject.dealer.hand.size).to eq 2
     end
+
+    it 're-deals cards if greater than 21' do
+      
+    end
   end
 end
