@@ -13,4 +13,8 @@ class Deck
       card.position = i += 1
     end
   end
+
+  def shuffle
+    
+  end
 end

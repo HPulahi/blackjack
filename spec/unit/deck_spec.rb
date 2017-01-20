@@ -14,5 +14,14 @@ describe Deck do
       expect(card_positions).to eq 1.upto(52).to_a
     end
   end
+
+  describe '#shuffle' do
+    it 'randomly mixes the deck of cards' do
+      subject.shuffle
+      card_positions = subject.cards.map(&:position)
+      expect(card_positions).not_to eq 1.upto(52).to_a
+    end
+    
+  end
 end
 

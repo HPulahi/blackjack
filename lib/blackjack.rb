@@ -10,7 +10,6 @@ class Blackjack
   end
 
   def start_game!
-    
   end
   private
 
