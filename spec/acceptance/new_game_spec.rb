@@ -2,8 +2,6 @@ require "spec_helper"
 require "blackjack"
 
 describe Blackjack do
-  let(:game) { Blackjack.new } 
-
   describe '#initialize' do
     it 'has a Dealer' do
       expect(subject.dealer).to be_a Dealer
@@ -15,11 +13,9 @@ describe Blackjack do
   end
 
   describe '#start_game!' do
-    before do
-      subject.start_game!
-    end
 
     it 'shuffles the cards' do
+      subject.start_game!
       hearts = subject.dealer.deck.cards.find_all{ |card| card.suit == "hearts" } 
       positions = hearts.map{|heart| subject.dealer.deck.cards.rindex(heart) }
 
@@ -27,15 +23,14 @@ describe Blackjack do
     end
 
     it 'deals a 2 card hand from the Dealer' do
+      subject.start_game!
       expect(subject.player.hand.size).to eq 2
     end
 
     it 'deals the dealer 2 cards' do
+      subject.start_game!
       expect(subject.dealer.hand.size).to eq 2
     end
 
-    it 're-deals cards if greater than 21' do
-      
-    end
   end
 end

@@ -9,8 +9,16 @@ class Player
     hand.map(&:value).join(" ")
   end
 
+  def show
+    hand.map(&:value).join(" + ")
+  end
+
   def total
-    hand.map(&:value).reduce(:+)
+    hand.empty? ? 0 : hand.map(&:value).reduce(:+)
+  end
+
+  def total_hand_invalid?
+    total > 21
   end
 
 end

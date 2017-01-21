@@ -1,4 +1,4 @@
-require 'card'
+require 'blackjack/card'
 
 class Deck
   attr_accessor :cards
@@ -11,4 +11,7 @@ class Deck
     cards.delete(cards.first)
   end
 
+  def shuffle!
+    cards.shuffle!
+  end
 end

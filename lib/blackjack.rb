@@ -3,7 +3,7 @@ require 'blackjack/player'
 
 class Blackjack
   class Config
-    @@actions = ['hit', 'stand']
+    @@actions = ['hit', 'stand', 'quit']
     def self.actions
       @@actions
     end
@@ -12,32 +12,29 @@ class Blackjack
   attr_accessor :dealer, :player
 
   def initialize
-    # introduction
     self.dealer = Dealer.new(self)
     self.player = Player.new
   end
 
   def start_game!
-    # introduction
-    dealer.open_game(player)
-    if player.total > 21 || dealer.total > 21
-      puts("re-deal")
-      player.hand = []
-      dealer.hand = []
-      dealer.open_game(player)
-    end
+    dealer.open_game
 
+    result = nil
     until result == :quit
       action, args = get_action
       result = do_action( action, args )
     end
   end
 
+  def show_hands
+    puts "Player hand: "
+  end
+
   def get_action
     action = nil
-    until Main::Config.actions.include?(action)
-      puts "Actions " + Main::Config.actions.join(", ") if action
-      print "> "
+    until Blackjack::Config.actions.include?(action)
+      puts "Actions " + Blackjack::Config.actions.join(", ") if action
+      print "Player: "
       user_response = gets.chomp
       args = user_response.downcase.strip.split(' ')
       action = args.shift
@@ -48,20 +45,41 @@ class Blackjack
   def do_action(action, args=[])
     case action
     when 'hit'
-      dealer.deal(player) 
+      dealer.hit(player) 
+      if player.total > 21
+        puts "Dealer Wins!\n\n"
+        puts "Player hand: #{player.show} = #{player.total}"
+        puts "Dealer hand: #{dealer.show} = #{dealer.total} "
+        return :quit
+      end
     when 'stand'
+      until  dealer.total > 17
+        dealer.deal_card_for(dealer)
+      end
+      if dealer.total > 21
+        puts "Player Wins!\n\n"
+      end
+
+      if dealer.total <= 21 && player.total < dealer.total
+        puts "Dealer Wins!\n\n"
+      end
+
+      if player.total <= 21 && dealer.total < player.total
+        puts "Player Wins!\n\n"
+      end
+
+      if player.total == dealer.total
+        puts "Dealer Wins!\n\n"
+      end
+
+      puts "Player hand: #{player.show} = #{player.total}"
+      puts "Dealer hand: #{dealer.show} = #{dealer.total} "
+      return :quit
     when 'quit'
-    return :quit
+      return :quit
     else 
       puts 'I dont understand that command'
     end
   end
 
-  private
-
-  def introduction
-    puts "\n\n<<< Welcome to the game of Blackjack >>>\n\n"
-    puts "This is an game will test your skills against the greatest player of them all.\n\n"
-    puts "The Dealer!"
-  end
 end
