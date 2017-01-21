@@ -26,10 +26,6 @@ class Blackjack
     end
   end
 
-  def show_hands
-    puts "Player hand: "
-  end
-
   def get_action
     action = nil
     until Blackjack::Config.actions.include?(action)
