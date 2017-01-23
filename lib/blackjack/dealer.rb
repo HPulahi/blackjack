@@ -1,65 +1,54 @@
-require 'blackjack/deck'
+module Blackjack
+  class Dealer
+    include AccountUtilities
+    
+    attr_accessor :game, :deck :hand
 
-class Dealer
-  attr_accessor :deck, :game, :hand
+    def initialize(game)
+      @game = game
+      @hand = []
+    end
 
-  def initialize(game)
-    self.hand = []
-    self.game = game
-  end
+    def new_game
+      @deck = Card.all
+      deck.shuffle!
+      
+      deal
+      redeal if game.player.total_hand_invalid?
+    end
 
-  def open_game
-    self.deck = Deck.new
-    deck.shuffle!
+    def deal
+      card_for(game.player)
+      card_for(game.player)
+      card_for(self)
+      card_for(self)
+      
+      show_output(game.player.reveal)
+    end
+    
+    def card_for(player)
+      player.hand << deck.draw
+    end
 
-    deal_two_for(game.player)
-    deal_two_for(self)
+    def hit(player)
+      card = deck.draw
+      player.hand << card 
+      
+      show_output(card)
+    end
 
-    puts "Dealer: #{game.player.reveal}"
+    def show_output(values=nil)
+      puts "Dealer: #{values}"
+    end
+    
+    def redeal
+      reset_game
+      new_game
+    end
 
-    if game.player.total_hand_invalid?
-      redeal
+    def reset_game
+      game.player.hand  = []
+      @hand             = []
     end
   end
-
-  def deal_two_for(player)
-    deal_card_for(player)
-    deal_card_for(player)
-  end
-
-  def deal_card_for(player)
-    card = deck.draw
-    player.hand << deck.draw
-  end
-
-  def hit(player)
-    card = deck.draw
-    player.hand << card 
-
-   puts "Dealer: #{card.value}"
-  end
-
-  def total_hand_invalid?
-    total > 21
-  end
-
-  def redeal
-    game.player.hand = []
-    self.hand = []
-    
-    open_game
-  end
-
-  def reveal
-    hand.map(&:value)
-  end
-
-  def show
-    hand.map(&:value).join(" + ")
-  end
-
-  def total
-    hand.empty? ? 0 : hand.map(&:value).reduce(:+)
-  end
 end
-
