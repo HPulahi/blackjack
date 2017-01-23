@@ -1,11 +1,6 @@
-require 'blackjack/utils/ruleset'
-require 'blackjack/utils/totals_helper'
-require 'blackjack/player'
-require 'blackjack/dealer'
-
 module Blackjack
   class Game
-    include Ruleset
+    include GameRules
     include TotalsHelper
 
     attr_accessor :dealer, :player
@@ -15,7 +10,7 @@ module Blackjack
       @dealer = Dealer.new(self)
     end
 
-    def start
+    def run
       dealer.new_game
 
       result = nil
@@ -51,15 +46,14 @@ module Blackjack
     def hit
       dealer.hit(player)
       show_output(player.last_card)
-      
-      calculate_winner
+
+      define_winner(player.total, dealer.total)
     end
 
     def stand
       dealer.end_game
-      finish_game
-      
-      return :quit
+      winner = define_winner(player.total, dealer.total)
+      show_game_outcome(winner)
     end
   end
 end

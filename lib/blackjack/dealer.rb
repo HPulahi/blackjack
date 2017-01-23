@@ -1,5 +1,3 @@
-require 'blackjack/card'
-
 module Blackjack
   class Dealer
     include TotalsHelper
@@ -43,7 +41,7 @@ module Blackjack
       reset_game
       new_game
     end
-    
+
     def draw_card
       deck.delete(deck.first)
     end
@@ -51,6 +49,6 @@ module Blackjack
     def reset_game
       player.hand     = []
       self.hand       = []
-    end    
+    end
   end
 end

@@ -15,7 +15,7 @@ describe Deck do
     end
 
     it 'has all cards in order' do
-      hearts = subject.cards.find_all{ |card| card.suit == "hearts" } 
+      hearts = subject.cards.find_all{ |card| card.suit == "hearts" }
       positions = hearts.map{|heart| subject.cards.rindex(heart) }
       expect(positions).to eq([0,1,2,3,4,5,6,7,8,9,10,11,12])
     end
@@ -32,7 +32,4 @@ describe Deck do
       expect(subject.cards.size).to eq(51)
     end
   end
-
-
 end
-
