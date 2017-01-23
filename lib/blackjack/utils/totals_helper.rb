@@ -1,4 +1,4 @@
-module AccountUtilities
+module TotalsHelper
   def reveal
     hand.map(&:value).join(" ")
   end
@@ -13,5 +13,9 @@ module AccountUtilities
 
   def total_hand_invalid?
     total > 21
+  end
+
+  def show_output(values=nil)
+    puts "Dealer: #{values}"
   end
 end

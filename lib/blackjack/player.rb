@@ -1,9 +1,15 @@
-class Player
-  include AccountUtilities
-  
-  attr_accessor :hand
+module Blackjack
+  class Player
+    include TotalsHelper
 
-  def initialize
-    self.hand = []
+    def self.actions
+      ['hit', 'stand', 'quit']
+    end
+
+    attr_accessor :hand
+
+    def initialize
+      self.hand = []
+    end
   end
 end
