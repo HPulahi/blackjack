@@ -30,7 +30,7 @@ module Blackjack
     end
 
     def initialize(key, index)
-      @value  = ket
+      @value  = key
       @suit   = SUITS[index]
     end
   end

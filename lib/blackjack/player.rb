@@ -9,7 +9,7 @@ module Blackjack
     attr_accessor :hand
 
     def initialize
-      self.hand = []
+      @hand = []
     end
   end
 end

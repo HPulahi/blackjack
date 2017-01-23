@@ -1,10 +1,10 @@
 module TotalsHelper
-  def reveal
-    hand.map(&:value).join(" ")
+  def show_hand(operator=nil)
+    hand.map(&:value).join(" #{operator} ")
   end
-
-  def show
-    hand.map(&:value).join(" + ")
+  
+  def last_card
+    hand.last.value
   end
 
   def total

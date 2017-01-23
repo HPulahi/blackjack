@@ -1,4 +1,0 @@
-# TODO
-
-1. Learn about mocks and stubs
-
