@@ -1,25 +1,19 @@
 # encoding: UTF-8
 require_relative "../spec_helper"
-require "card"
 
-describe Card do
+describe Blackjack::Card do
   describe ".all" do
-    it 'loads 12 cards from the data store' do
-       expect(Card.all.size).to eq 52
+    it 'has 52 cards' do
+      card = double("Card")
+      binding.pry
     end
+
+    it 'has 4 suits pending'
+
+    it 'has 12 cards for each suit pending'
 
     it "instantates instances of Card" do
-      Card.all.all? { |review| expect(review).to be_a Card }
-    end
-  end
-
-  describe ".suits" do
-    it 'returns 4 suits' do
-      expect(Card.suits.size).to eq 4
-    end
-
-    it 'returns the correct values' do
-      expect(Card.suits).to include("hearts", "diamonds", "spades", "clubs")
+      Blackjack::Card.all.all? { |review| expect(review).to be_a Blackjack::Card }
     end
   end
 end
